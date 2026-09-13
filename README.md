@@ -7,8 +7,8 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-8 complete: all three pipelines, output verification and the six-scenario
-benchmark suite. Analysis/charts and the final evidence-based case study follow.
+Phases 1-9 complete: all three pipelines, verification, the six-scenario benchmark
+suite and analysis/chart generation. The final engineering case study follows.
 No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
@@ -150,6 +150,12 @@ See the [verification policy](docs/equivalence.md) for exact floating-point comp
 and checksum details.
 
 No full-scale TLC benchmark runs yet. Charts and tables will use only recorded executions.
+
+Generate the [analysis report](analysis/README.md) with
+`uv run --frozen python -m analysis.generate benchmarks/results/RUN_ID/results.json`.
+It creates runtime charts, an initial-storage chart, a measurement table and source
+provenance under `analysis/generated/`. Fixture results are labeled explicitly;
+invalid or incomplete comparisons are rejected.
 
 ## License
 

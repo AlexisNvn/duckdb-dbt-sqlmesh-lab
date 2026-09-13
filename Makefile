@@ -7,8 +7,11 @@ RAW_DIR ?= data/raw
 DATABASE ?= data/generated/duckdb.duckdb
 DBT_DATABASE ?= data/generated/dbt.duckdb
 SQLMESH_DATABASE ?= data/generated/mesh_warehouse.duckdb
+RESULTS ?=
 
-.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify benchmark benchmark-suite
+.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify benchmark benchmark-suite analysis
+analysis:
+	$(UV) run --frozen python -m analysis.generate "$(RESULTS)"
 benchmark-suite:
 	$(UV) run --frozen python -m benchmarks.run --raw-dir "$(RAW_DIR)" --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH) --suite
 benchmark:

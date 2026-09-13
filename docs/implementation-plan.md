@@ -17,7 +17,9 @@ Run applicable tests and Ruff after each phase, then commit working code.
 8. Complete: sequential six-scenario suite with isolated data/model edits,
    conservative refresh policies, SQLMesh plan intervals, storage observations
    and production-isolation verification. Full-scale runs remain outstanding.
-9. Charts and tables derived exclusively from actual runs.
+9. Complete: validated single-run analysis, Markdown/CSV tables, runtime and
+   initial-storage charts, and input provenance. Generated from actual fixture runs;
+   no full-scale performance conclusions.
 10. Engineering case study grounded in measurements.
 
 Assumptions: default to January-June 2025, with July for incremental experiments.
