@@ -7,7 +7,9 @@ Run applicable tests and Ruff after each phase, then commit working code.
 3. Complete: plain SQL DuckDB models, small runner, validation and metadata.
 4. Complete: dbt sources, refs, materializations, daily incremental handling,
    tests, generated documentation and fixture comparison with DuckDB.
-5. SQLMesh models, intervals, audits, tests and environments.
+5. Complete: SQLMesh models, daily intervals, audits, native unit test,
+   restatement and development environment fixture checks. pandas pinned to 2.2.3
+   to resolve a state migration incompatibility with the shared DuckDB version.
 6. Cross-framework schema, row count and value equivalence checks.
 7. Benchmark runner producing JSON and CSV.
 8. Six scenarios including historical correction and business logic changes.

@@ -3,7 +3,7 @@ name = "local-analytics-stack-benchmark"
 version = "0.1.0"
 description = "Reproducible DuckDB, dbt and SQLMesh experiments"
 requires-python = ">=3.11,<3.12"
-dependencies = ["duckdb==1.3.2", "dbt-core==1.10.11", "dbt-duckdb==1.9.6", "sqlmesh==0.213.0", "matplotlib==3.10.6"]
+dependencies = ["duckdb==1.3.2", "dbt-core==1.10.11", "dbt-duckdb==1.9.6", "sqlmesh==0.213.0", "matplotlib==3.10.6", "pandas==2.2.3"]
 
 [dependency-groups]
 dev = ["pytest==8.4.2", "ruff==0.13.0"]

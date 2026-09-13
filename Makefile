@@ -6,8 +6,11 @@ START_MONTH ?= 1
 RAW_DIR ?= data/raw
 DATABASE ?= data/generated/duckdb.duckdb
 DBT_DATABASE ?= data/generated/dbt.duckdb
+SQLMESH_DATABASE ?= data/generated/mesh_warehouse.duckdb
 
-.PHONY: setup test lint format check help download fixtures duckdb dbt
+.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh
+sqlmesh:
+	$(UV) run --frozen python implementations/sqlmesh/runner.py --raw-dir "$(RAW_DIR)" --database "$(SQLMESH_DATABASE)" --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH)
 dbt:
 	$(UV) run --frozen python implementations/dbt/runner.py --raw-dir "$(RAW_DIR)" --database "$(DBT_DATABASE)" --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH)
 duckdb:
@@ -27,5 +30,5 @@ format:
 	$(UV) run --frozen ruff format .
 check: lint test
 help:
-	@echo "Available: setup, download, fixtures, duckdb, dbt, test, lint, format, check"
+	@echo "Available: setup, download, fixtures, duckdb, dbt, sqlmesh, test, lint, format, check"
 	@echo "Pipeline targets will be added with their implementation phases."

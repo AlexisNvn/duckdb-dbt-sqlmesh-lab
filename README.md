@@ -7,8 +7,8 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-4 complete: scaffold, downloader, deterministic fixtures, pure DuckDB
-and dbt pipelines. SQLMesh and controlled benchmarks remain to be implemented.
+Phases 1-5 complete: scaffold, downloader, deterministic fixtures, and all three
+pipelines. Broader equivalence checks and controlled benchmarks remain to be implemented.
 No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
@@ -117,9 +117,21 @@ Fixture integration checks compare all six dbt outputs with DuckDB across initia
 build, rerun, new month and a full refresh. dbt documentation is generated locally
 under `implementations/dbt/target/`.
 
+## SQLMesh implementation
+
+The [SQLMesh implementation](implementations/sqlmesh/README.md) adds native plans,
+state, daily intervals, audits and virtual environments. Fixture tests verify its
+six outputs against DuckDB, unchanged interval reuse, explicit restatement after
+adding July, and development views. Source changes require `--restate`; this
+conservative workflow does not claim minimal incremental computation.
+
+```sh
+make sqlmesh RAW_DIR=tests/fixtures
+```
+
 ## Benchmark results
 
-No runs yet. Charts and tables will use only recorded executions.
+No controlled benchmark runs yet. Charts and tables will use only recorded executions.
 
 ## License
 

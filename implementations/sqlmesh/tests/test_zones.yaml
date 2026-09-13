@@ -1,0 +1,16 @@
+test_zone_projection:
+  model: analytics.dim_zones
+  inputs:
+    raw.raw_zones:
+      rows:
+        - LocationID: 1
+          Borough: Synthetic
+          Zone: Airport
+          service_zone: Airports
+  outputs:
+    query:
+      rows:
+        - zone_id: 1
+          borough: Synthetic
+          zone_name: Airport
+          service_zone: Airports
