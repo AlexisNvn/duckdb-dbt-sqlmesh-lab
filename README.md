@@ -7,8 +7,9 @@ computational tradeoffs?
 
 ## Status
 
-Phase 1: repository scaffold and dependency validation. Pipelines and benchmarks
-are not implemented yet. No performance conclusions have been drawn.
+Phases 1-2 complete: repository scaffold, dependency validation, configurable
+downloader and deterministic fixtures. Pipelines and benchmarks are not implemented
+yet. No performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
 ## Architecture
@@ -29,9 +30,36 @@ flowchart TD
 
 ## Dataset
 
-Planned default: January-June 2025 official NYC TLC Yellow Taxi Parquet files,
-plus the taxi zone lookup. July supports the new-month experiment. Raw downloads
-stay outside Git under `data/raw/`. CI will use a tiny synthetic fixture.
+Default: January-June 2025 official NYC TLC Yellow Taxi Parquet files, plus the
+taxi zone lookup. July supports the new-month experiment. Downloads use the links
+published on the [official TLC data page](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+Raw downloads stay outside Git under `data/raw/`.
+
+```sh
+make download MONTHS=6
+make download MONTHS=12
+uv run --frozen python -m scripts.download --year 2025 --months 6
+uv run --frozen python -m scripts.download --year 2025 --start-month 7 --months 1
+uv run --frozen python -m scripts.download --months 6 --dry-run
+```
+
+`--output-dir` selects a destination; the default is rooted at this repository.
+Existing files are validated and reused. Use `--force` to fetch replacements.
+Downloads stream to temporary files and replace the destination only after length
+and format checks. Failures preserve existing files; rerun the command to retry.
+Each successful selection writes a manifest with source URLs, byte sizes, SHA-256
+hashes and verification times. Hashes describe local bytes, not publisher-signed
+checksums. Cached files do not detect upstream revisions automatically. Parquet
+validation checks metadata and key columns, not every row or data page.
+
+The downloader does not remove other months already present in the destination.
+Future runners must select the intended files explicitly rather than glob all data.
+Year selections before 2025 may have different schemas; only the 2025-shaped
+fixtures are validated at this phase.
+
+CI uses [synthetic fixtures](tests/fixtures/README.md): seven monthly Parquet files,
+112 rows in total, and a three-zone synthetic lookup. Regenerate with `make fixtures`
+or `uv run --frozen python -m scripts.generate_fixtures`. No live downloads run in CI.
 
 ## Setup
 

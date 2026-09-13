@@ -1,0 +1,4 @@
+LocationID,Borough,Zone,service_zone
+1,Synthetic Borough,Synthetic Airport,Airports
+2,Synthetic Borough,Synthetic Downtown,Yellow Zone
+3,Synthetic Borough,Synthetic Unused Zone,Boro Zone

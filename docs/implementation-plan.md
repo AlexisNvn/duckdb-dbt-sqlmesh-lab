@@ -2,8 +2,8 @@
 
 Run applicable tests and Ruff after each phase, then commit working code.
 
-1. Scaffold, dependency pins and lockfile, basic CI.
-2. Configurable official TLC downloader and deterministic small fixtures.
+1. Complete: scaffold, dependency pins and lockfile, basic CI.
+2. Complete: configurable official TLC downloader and deterministic small fixtures.
 3. Plain SQL DuckDB models, small runner, validation and metadata.
 4. dbt sources, refs, materializations, incremental handling and tests.
 5. SQLMesh models, intervals, audits, tests and environments.
@@ -16,4 +16,6 @@ Run applicable tests and Ruff after each phase, then commit working code.
 Assumptions: default to January-June 2025, with July for incremental experiments.
 Use Python 3.11 as the shared runtime. Omit optional ML until the core comparison
 works. Scaffold CI checks only dependencies; fixture pipelines and equivalence
-checks will be added in their respective phases.
+checks will be added in their respective phases. Phase 2 adds offline downloader
+integrity and fixture regeneration tests. Full TLC downloads and transformation
+validation remain separate from these small correctness checks.
