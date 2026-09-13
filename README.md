@@ -7,9 +7,9 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-2 complete: repository scaffold, dependency validation, configurable
-downloader and deterministic fixtures. Pipelines and benchmarks are not implemented
-yet. No performance conclusions have been drawn.
+Phases 1-3 complete: scaffold, downloader, deterministic fixtures and the pure
+DuckDB pipeline. dbt, SQLMesh and controlled benchmarks remain to be implemented.
+No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
 ## Architecture
@@ -82,6 +82,23 @@ Planned scenarios: initial build, unchanged rerun, new month, historical
 correction, revenue logic change, and development isolation. Verify equivalent
 outputs before comparing time. Record framework state separately where possible
 when interpreting storage. Fixture timings cannot establish TLC-scale performance.
+
+## DuckDB implementation
+
+The [DuckDB runner](implementations/duckdb/README.md) executes six explicitly ordered
+SQL models, validates outputs and reports JSON execution metrics. Every run is a
+full rebuild, with transaction rollback on SQL or quality failure. This keeps the
+manual orchestration visible. The [shared business definitions](docs/business-definitions.md)
+will also govern the later framework implementations.
+
+```sh
+make duckdb RAW_DIR=tests/fixtures
+uv run --frozen python implementations/duckdb/runner.py --raw-dir tests/fixtures --metrics data/generated/duckdb-run.json
+```
+
+The six-month fixture produces 54 staging rows, 42 fact rows, 12 daily rows,
+one zone aggregate and six monthly rows. Seven rows per month fail staging rules;
+two more fail zone joins. All three synthetic zones remain in the dimension.
 
 ## Benchmark results
 

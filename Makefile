@@ -3,8 +3,12 @@ UV ?= uv
 YEAR ?= 2025
 MONTHS ?= 6
 START_MONTH ?= 1
+RAW_DIR ?= data/raw
+DATABASE ?= data/generated/duckdb.duckdb
 
-.PHONY: setup test lint format check help download fixtures
+.PHONY: setup test lint format check help download fixtures duckdb
+duckdb:
+	$(UV) run --frozen python implementations/duckdb/runner.py --raw-dir "$(RAW_DIR)" --database "$(DATABASE)" --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH)
 download:
 	$(UV) run --frozen python -m scripts.download --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH)
 fixtures:
@@ -20,5 +24,5 @@ format:
 	$(UV) run --frozen ruff format .
 check: lint test
 help:
-	@echo "Available: setup, download, fixtures, test, lint, format, check"
+	@echo "Available: setup, download, fixtures, duckdb, test, lint, format, check"
 	@echo "Pipeline targets will be added with their implementation phases."

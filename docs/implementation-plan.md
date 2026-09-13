@@ -4,7 +4,7 @@ Run applicable tests and Ruff after each phase, then commit working code.
 
 1. Complete: scaffold, dependency pins and lockfile, basic CI.
 2. Complete: configurable official TLC downloader and deterministic small fixtures.
-3. Plain SQL DuckDB models, small runner, validation and metadata.
+3. Complete: plain SQL DuckDB models, small runner, validation and metadata.
 4. dbt sources, refs, materializations, incremental handling and tests.
 5. SQLMesh models, intervals, audits, tests and environments.
 6. Cross-framework schema, row count and value equivalence checks.
