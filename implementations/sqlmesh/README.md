@@ -39,6 +39,8 @@ range does not delete daily intervals outside that range. Model code edits are
 handled by SQLMesh's change categorization and plans; benchmark scenarios will
 exercise specific edits in Phase 8. Plan summary flags printed by the wrapper are
 planning metadata, not timing or counts of executed models.
+`--plan-report PATH` writes scheduled intervals and change flags before applying
+the plan; the benchmark suite retains this artifact for each SQLMesh scenario.
 
 ## Environments and storage
 

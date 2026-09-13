@@ -117,6 +117,8 @@ def run(
             command += ["--metrics", str(work / "runner-metrics.json")]
         if implementation == "dbt":
             command += ["--full-refresh", "--artifact-dir", str(work / "artifacts")]
+        if implementation == "sqlmesh":
+            command += ["--plan-report", str(work / "plan.json")]
         timestamp = datetime.now(UTC).isoformat()
         with (work / "runner.log").open("w", encoding="utf-8") as log:
             tick = perf_counter()
@@ -146,6 +148,8 @@ def run(
             "output_rows": None,
             "execution_seconds": seconds,
             "models_executed": executed,
+            "rows_processed": None,
+            "strategy": "fresh_database_initial_build",
             "database_size_mb": database.stat().st_size / 1024**2 if database.exists() else None,
             "timestamp": timestamp,
             "exit_code": completed.returncode,
@@ -187,7 +191,15 @@ if __name__ == "__main__":
     parser.add_argument("--year", type=int, default=2025)
     parser.add_argument("--start-month", type=int, default=1)
     parser.add_argument("--fixture", action="store_true", help="Use bundled synthetic inputs")
+    parser.add_argument("--suite", action="store_true", help="Run all six scenarios sequentially")
     args = parser.parse_args()
     if args.fixture:
         args.raw_dir = ROOT / "tests/fixtures"
-    print(run(**vars(args)))
+    suite = args.suite
+    del args.suite
+    if suite:
+        from benchmarks.scenarios import run_suite
+
+        print(run_suite(**vars(args)))
+    else:
+        print(run(**vars(args)))

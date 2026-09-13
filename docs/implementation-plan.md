@@ -14,7 +14,9 @@ Run applicable tests and Ruff after each phase, then commit working code.
    comparison and checksum report, fault-injection tests and explicit fixture CI.
 7. Complete: isolated initial-build benchmark runner producing JSON/CSV,
    input provenance, logs and verified output status. Other scenarios follow in Phase 8.
-8. Six scenarios including historical correction and business logic changes.
+8. Complete: sequential six-scenario suite with isolated data/model edits,
+   conservative refresh policies, SQLMesh plan intervals, storage observations
+   and production-isolation verification. Full-scale runs remain outstanding.
 9. Charts and tables derived exclusively from actual runs.
 10. Engineering case study grounded in measurements.
 

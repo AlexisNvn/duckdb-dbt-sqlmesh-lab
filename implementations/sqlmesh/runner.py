@@ -26,6 +26,7 @@ def run(
     start_month: int = 1,
     environment: str = "prod",
     restate: bool = False,
+    plan_report: Path | None = None,
 ) -> None:
     if not 1 <= months <= 12 or not 1 <= start_month <= 12 or start_month + months > 13:
         raise ValueError("Select consecutive months within a year")
@@ -88,9 +89,23 @@ def run(
             execution_time=(end + timedelta(days=1)).isoformat(),
             restate_models=["analytics.stg_trips", "analytics.dim_zones"] if restate else None,
             no_prompts=True,
-            auto_apply=True,
+            auto_apply=False,
             include_unmodified=True,
         )
+        details = {
+            "environment": environment,
+            "has_changes": plan.has_changes,
+            "requires_backfill": plan.requires_backfill,
+            "restate": restate,
+            "scheduled_intervals": [
+                {"model": item.snapshot_id.name, "intervals": item.intervals}
+                for item in plan.missing_intervals
+            ],
+        }
+        if plan_report:
+            plan_report.parent.mkdir(parents=True, exist_ok=True)
+            plan_report.write_text(json.dumps(details, indent=2) + "\n", encoding="utf-8")
+        context.apply(plan)
         print(
             json.dumps(
                 {
@@ -116,4 +131,5 @@ if __name__ == "__main__":
     parser.add_argument("--start-month", type=int, default=1)
     parser.add_argument("--environment", default="prod")
     parser.add_argument("--restate", action="store_true")
+    parser.add_argument("--plan-report", type=Path)
     run(**vars(parser.parse_args()))

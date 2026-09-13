@@ -7,8 +7,8 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-7 complete: all three pipelines, a reusable equivalence verifier and an
-initial-build benchmark harness. Remaining scenarios and performance analysis follow.
+Phases 1-8 complete: all three pipelines, output verification and the six-scenario
+benchmark suite. Analysis/charts and the final evidence-based case study follow.
 No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
@@ -137,13 +137,19 @@ logs and provenance, verifies outputs and writes JSON/CSV results. Try
 after downloading data. Fixture runs validate the harness; they do not establish
 full-scale performance. Execution counts unavailable from a runner remain null.
 
+Run `uv run --frozen python -m benchmarks.run --fixture --suite` for all six
+scenarios, or `make benchmark-suite MONTHS=6` with seven downloaded months available.
+The suite retains state between scenarios, changes only copied data/models, and
+verifies that development edits leave production outputs unchanged. Source changes
+use conservative full refresh/restatement policies, documented with each scenario.
+
 After building matching selections, `make verify` checks all six output schemas,
 row counts and complete row multisets, and writes `data/generated/equivalence.json`.
 CI runs this against all three stacks on small fixtures and fails on disagreement.
 See the [verification policy](docs/equivalence.md) for exact floating-point comparison
 and checksum details.
 
-No controlled benchmark runs yet. Charts and tables will use only recorded executions.
+No full-scale TLC benchmark runs yet. Charts and tables will use only recorded executions.
 
 ## License
 
