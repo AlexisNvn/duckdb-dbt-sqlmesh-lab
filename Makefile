@@ -8,7 +8,9 @@ DATABASE ?= data/generated/duckdb.duckdb
 DBT_DATABASE ?= data/generated/dbt.duckdb
 SQLMESH_DATABASE ?= data/generated/mesh_warehouse.duckdb
 
-.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify
+.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify benchmark
+benchmark:
+	$(UV) run --frozen python -m benchmarks.run --raw-dir "$(RAW_DIR)" --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH)
 verify:
 	$(UV) run --frozen python -m scripts.verify_outputs --duckdb "$(DATABASE)" --dbt "$(DBT_DATABASE)" --sqlmesh "$(SQLMESH_DATABASE)" --report data/generated/equivalence.json
 sqlmesh:

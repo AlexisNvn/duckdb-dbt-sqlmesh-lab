@@ -12,7 +12,8 @@ Run applicable tests and Ruff after each phase, then commit working code.
    to resolve a state migration incompatibility with the shared DuckDB version.
 6. Complete: reusable read-only three-framework schema, row count, exact multiset
    comparison and checksum report, fault-injection tests and explicit fixture CI.
-7. Benchmark runner producing JSON and CSV.
+7. Complete: isolated initial-build benchmark runner producing JSON/CSV,
+   input provenance, logs and verified output status. Other scenarios follow in Phase 8.
 8. Six scenarios including historical correction and business logic changes.
 9. Charts and tables derived exclusively from actual runs.
 10. Engineering case study grounded in measurements.

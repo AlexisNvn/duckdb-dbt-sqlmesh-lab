@@ -7,9 +7,8 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-6 complete: scaffold, downloader, deterministic fixtures, all three
-pipelines and a reusable three-way equivalence verifier. Controlled benchmarks
-remain to be implemented.
+Phases 1-7 complete: all three pipelines, a reusable equivalence verifier and an
+initial-build benchmark harness. Remaining scenarios and performance analysis follow.
 No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
@@ -131,6 +130,12 @@ make sqlmesh RAW_DIR=tests/fixtures
 ```
 
 ## Benchmark results
+
+The [benchmark harness](benchmarks/README.md) runs fresh initial builds, retains
+logs and provenance, verifies outputs and writes JSON/CSV results. Try
+`uv run --frozen python -m benchmarks.run --fixture` or `make benchmark MONTHS=6`
+after downloading data. Fixture runs validate the harness; they do not establish
+full-scale performance. Execution counts unavailable from a runner remain null.
 
 After building matching selections, `make verify` checks all six output schemas,
 row counts and complete row multisets, and writes `data/generated/equivalence.json`.
