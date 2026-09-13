@@ -1,0 +1,8 @@
+{
+  "source": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\benchmarks\\results\\20260913T131941Z-c7705b34\\results.json",
+  "sha256": "4993f8221829a52566e34badcedb6f5fd0f72134a06afbe3af4ff1331abf3946",
+  "run_id": "20260913T131941Z-c7705b34",
+  "dataset_kind": "fixture",
+  "record_count": 18,
+  "matplotlib_version": "3.10.6"
+}

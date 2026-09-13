@@ -1,5 +1,9 @@
 # Analysis from verified executions
 
+The [published fixture report](case-study/report.md) is a small tracked snapshot
+used by the root case study. Its [provenance notes](../docs/case-study-notes.md)
+distinguish this curated evidence from disposable generated output.
+
 Analyze one benchmark run at a time:
 
 ```sh

@@ -1,0 +1,61 @@
+{
+  "run_id": "20260913T131941Z-c7705b34",
+  "dataset_kind": "fixture",
+  "inputs": [
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\yellow_tripdata_2025-01.parquet",
+      "bytes": 4838,
+      "sha256": "e8840671fe95442c84ee283477d1e81e726e2198b14f0befd520b13137c198f0"
+    },
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\yellow_tripdata_2025-02.parquet",
+      "bytes": 4838,
+      "sha256": "d83c6fb604a98034e52dc29e83139b500e2c0ef9f884254324c3f4d37e6f0c00"
+    },
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\yellow_tripdata_2025-03.parquet",
+      "bytes": 4841,
+      "sha256": "c242eb71fb1e4cda0baed3c619b79fed34a8c12617bf244c3c8178edfa5c1871"
+    },
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\yellow_tripdata_2025-04.parquet",
+      "bytes": 4838,
+      "sha256": "02ed1202827587a2ab8bacd349fe835727d4c0fbff9e21e8d9db8557a3e2b288"
+    },
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\yellow_tripdata_2025-05.parquet",
+      "bytes": 4838,
+      "sha256": "09f80615c138847413ebbee5b1e83bee10be5adde4a540088be4f2a71e82cd54"
+    },
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\yellow_tripdata_2025-06.parquet",
+      "bytes": 4838,
+      "sha256": "ecd7f80119a11b4f10747e600ea9d17572fce14f86ad1fea5ca5801b507982d5"
+    },
+    {
+      "path": "C:\\Users\\nvrla\\Documents\\Upwork\\duckdb-dbt-sqlmesh-lab\\tests\\fixtures\\taxi_zone_lookup.csv",
+      "bytes": 187,
+      "sha256": "1e8bc20e02758b6e6fbb588043224950390f482b2181ed702faed91c94dad790"
+    }
+  ],
+  "platform": "Windows-10-10.0.26200-SP0",
+  "machine": "AMD64",
+  "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+  "logical_cpus": 24,
+  "python": "3.11.13",
+  "versions": {
+    "duckdb": "1.3.2",
+    "dbt-core": "1.10.11",
+    "dbt-duckdb": "1.9.6",
+    "sqlmesh": "0.213.0",
+    "pandas": "2.2.3"
+  },
+  "order": [
+    "duckdb",
+    "dbt",
+    "sqlmesh"
+  ],
+  "scenario": "initial_build",
+  "timing_scope": "runner subprocess wall clock including startup and framework checks",
+  "cache_policy": "fresh project caches and databases; OS cache not cleared; inputs pre-read"
+}

@@ -20,11 +20,12 @@ Run applicable tests and Ruff after each phase, then commit working code.
 9. Complete: validated single-run analysis, Markdown/CSV tables, runtime and
    initial-storage charts, and input provenance. Generated from actual fixture runs;
    no full-scale performance conclusions.
-10. Engineering case study grounded in measurements.
+10. Complete: engineering case study grounded in the recorded fixture suite,
+    tracked charts/source measurements/plan evidence, reproducibility commands
+    and scoped cleanup. Full-scale TLC benchmarking remains an explicit limitation.
 
 Assumptions: default to January-June 2025, with July for incremental experiments.
 Use Python 3.11 as the shared runtime. Omit optional ML until the core comparison
-works. Scaffold CI checks only dependencies; fixture pipelines and equivalence
-checks will be added in their respective phases. Phase 2 adds offline downloader
-integrity and fixture regeneration tests. Full TLC downloads and transformation
+works. CI now runs fixture pipelines, quality checks, exact equivalence verification,
+benchmark scenarios and analysis validation. Full TLC downloads and scale/performance
 validation remain separate from these small correctness checks.

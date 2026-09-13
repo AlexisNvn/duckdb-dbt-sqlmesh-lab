@@ -9,7 +9,9 @@ DBT_DATABASE ?= data/generated/dbt.duckdb
 SQLMESH_DATABASE ?= data/generated/mesh_warehouse.duckdb
 RESULTS ?=
 
-.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify benchmark benchmark-suite analysis
+.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify benchmark benchmark-suite analysis clean
+clean:
+	$(UV) run --frozen python -m scripts.clean
 analysis:
 	$(UV) run --frozen python -m analysis.generate "$(RESULTS)"
 benchmark-suite:
@@ -39,5 +41,6 @@ format:
 	$(UV) run --frozen ruff format .
 check: lint test
 help:
-	@echo "Available: setup, download, fixtures, duckdb, dbt, sqlmesh, verify, test, lint, format, check"
-	@echo "Pipeline targets will be added with their implementation phases."
+	@echo "Available: setup, download, fixtures, duckdb, dbt, sqlmesh, verify"
+	@echo "Benchmark: benchmark, benchmark-suite, analysis RESULTS=path/to/results.json"
+	@echo "Maintenance: test, lint, format, check, clean"
