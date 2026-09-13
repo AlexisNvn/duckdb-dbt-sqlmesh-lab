@@ -8,7 +8,9 @@ DATABASE ?= data/generated/duckdb.duckdb
 DBT_DATABASE ?= data/generated/dbt.duckdb
 SQLMESH_DATABASE ?= data/generated/mesh_warehouse.duckdb
 
-.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh
+.PHONY: setup test lint format check help download fixtures duckdb dbt sqlmesh verify
+verify:
+	$(UV) run --frozen python -m scripts.verify_outputs --duckdb "$(DATABASE)" --dbt "$(DBT_DATABASE)" --sqlmesh "$(SQLMESH_DATABASE)" --report data/generated/equivalence.json
 sqlmesh:
 	$(UV) run --frozen python implementations/sqlmesh/runner.py --raw-dir "$(RAW_DIR)" --database "$(SQLMESH_DATABASE)" --year $(YEAR) --months $(MONTHS) --start-month $(START_MONTH)
 dbt:
@@ -30,5 +32,5 @@ format:
 	$(UV) run --frozen ruff format .
 check: lint test
 help:
-	@echo "Available: setup, download, fixtures, duckdb, dbt, sqlmesh, test, lint, format, check"
+	@echo "Available: setup, download, fixtures, duckdb, dbt, sqlmesh, verify, test, lint, format, check"
 	@echo "Pipeline targets will be added with their implementation phases."

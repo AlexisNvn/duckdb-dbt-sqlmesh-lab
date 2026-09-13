@@ -10,7 +10,8 @@ Run applicable tests and Ruff after each phase, then commit working code.
 5. Complete: SQLMesh models, daily intervals, audits, native unit test,
    restatement and development environment fixture checks. pandas pinned to 2.2.3
    to resolve a state migration incompatibility with the shared DuckDB version.
-6. Cross-framework schema, row count and value equivalence checks.
+6. Complete: reusable read-only three-framework schema, row count, exact multiset
+   comparison and checksum report, fault-injection tests and explicit fixture CI.
 7. Benchmark runner producing JSON and CSV.
 8. Six scenarios including historical correction and business logic changes.
 9. Charts and tables derived exclusively from actual runs.

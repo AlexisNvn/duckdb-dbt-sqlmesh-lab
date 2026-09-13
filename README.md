@@ -7,8 +7,9 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-5 complete: scaffold, downloader, deterministic fixtures, and all three
-pipelines. Broader equivalence checks and controlled benchmarks remain to be implemented.
+Phases 1-6 complete: scaffold, downloader, deterministic fixtures, all three
+pipelines and a reusable three-way equivalence verifier. Controlled benchmarks
+remain to be implemented.
 No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
@@ -130,6 +131,12 @@ make sqlmesh RAW_DIR=tests/fixtures
 ```
 
 ## Benchmark results
+
+After building matching selections, `make verify` checks all six output schemas,
+row counts and complete row multisets, and writes `data/generated/equivalence.json`.
+CI runs this against all three stacks on small fixtures and fails on disagreement.
+See the [verification policy](docs/equivalence.md) for exact floating-point comparison
+and checksum details.
 
 No controlled benchmark runs yet. Charts and tables will use only recorded executions.
 

@@ -14,4 +14,7 @@ jobs:
       - run: uv sync --frozen
       - run: uv run --frozen ruff check .
       - run: uv run --frozen ruff format --check .
-      - run: uv run --frozen pytest
+      - name: Unit tests and framework lifecycle checks
+        run: uv run --frozen pytest -k "not test_three_framework_equivalence"
+      - name: Build all three stacks and verify fixture equivalence
+        run: uv run --frozen pytest tests/test_equivalence.py::test_three_framework_equivalence
