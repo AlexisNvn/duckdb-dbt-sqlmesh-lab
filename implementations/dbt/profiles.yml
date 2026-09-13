@@ -1,0 +1,10 @@
+local_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('BENCH_DBT_DATABASE') }}"
+      schema: "{{ env_var('BENCH_DBT_SCHEMA', 'main') }}"
+      threads: 1
+      settings:
+        threads: 1

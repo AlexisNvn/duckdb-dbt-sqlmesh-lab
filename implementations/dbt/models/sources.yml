@@ -1,0 +1,11 @@
+version: 2
+sources:
+  - name: tlc
+    description: Explicitly selected official TLC Parquet files and taxi zone CSV.
+    tables:
+      - name: raw_yellow_trips
+        meta:
+          external_location: "{{ var('trip_source') }}"
+      - name: raw_zones
+        meta:
+          external_location: "{{ var('zone_source') }}"

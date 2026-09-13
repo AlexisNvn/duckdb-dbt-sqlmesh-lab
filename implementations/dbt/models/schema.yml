@@ -1,0 +1,45 @@
+version: 2
+models:
+  - name: stg_trips
+    description: Cast and normalize trips using the shared business contract; full rebuild.
+    columns:
+      - name: pickup_datetime
+        data_tests: [not_null]
+      - name: dropoff_datetime
+        data_tests: [not_null]
+  - name: dim_zones
+    description: All lookup zones, including unused zones.
+    columns:
+      - name: zone_id
+        data_tests: [unique, not_null]
+  - name: fct_trips
+    description: Valid zone joins, fare-based revenue and safe ratios; duplicate trips retained.
+    columns:
+      - name: pickup_datetime
+        data_tests: [not_null]
+      - name: pickup_zone_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_zones')
+                field: zone_id
+      - name: dropoff_zone_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_zones')
+                field: zone_id
+  - name: daily_metrics
+    description: Incremental by pickup date, reprocessing the last existing date and newer dates.
+    columns:
+      - name: date
+        data_tests: [unique, not_null]
+  - name: zone_metrics
+    description: Entire selected history by pickup zone; full rebuild.
+  - name: monthly_metrics
+    description: Trip-weighted monthly averages and consecutive-month fractional growth.
+    columns:
+      - name: month
+        data_tests: [unique, not_null]

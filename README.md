@@ -7,8 +7,8 @@ computational tradeoffs?
 
 ## Status
 
-Phases 1-3 complete: scaffold, downloader, deterministic fixtures and the pure
-DuckDB pipeline. dbt, SQLMesh and controlled benchmarks remain to be implemented.
+Phases 1-4 complete: scaffold, downloader, deterministic fixtures, pure DuckDB
+and dbt pipelines. SQLMesh and controlled benchmarks remain to be implemented.
 No comparative performance conclusions have been drawn.
 See [the implementation plan](docs/implementation-plan.md).
 
@@ -99,6 +99,23 @@ uv run --frozen python implementations/duckdb/runner.py --raw-dir tests/fixtures
 The six-month fixture produces 54 staging rows, 42 fact rows, 12 daily rows,
 one zone aggregate and six monthly rows. Seven rows per month fail staging rules;
 two more fail zone joins. All three synthetic zones remain in the dimension.
+
+## dbt implementation
+
+The [dbt project](implementations/dbt/README.md) adds sources, dependency refs,
+model documentation and 14 data tests. Daily metrics use date-based incremental
+updates; the other five models rebuild. Historical corrections and late data before
+the daily cutoff require `--full-refresh`. This intentionally limited strategy
+does not establish a performance advantage over the SQL baseline.
+
+```sh
+make dbt RAW_DIR=tests/fixtures
+uv run --frozen python implementations/dbt/runner.py --raw-dir tests/fixtures --full-refresh --docs
+```
+
+Fixture integration checks compare all six dbt outputs with DuckDB across initial
+build, rerun, new month and a full refresh. dbt documentation is generated locally
+under `implementations/dbt/target/`.
 
 ## Benchmark results
 
